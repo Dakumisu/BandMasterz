@@ -1,10 +1,14 @@
 import defaultPlugins from '@cafe-noisette/philbin/vue/plugins';
+import createAudioPlugin from './audio';
+import createControlsPlugin from './controls';
 import createWebglPlugin from './webgl';
 
 /* prettier-ignore */
 const list = [
 	...defaultPlugins,
-	[createWebglPlugin, 'webgl']
+	[createAudioPlugin, 'audio'],
+	[createControlsPlugin, 'controls'],
+	[createWebglPlugin, 'webgl'],
 ];
 
 import { createLogger } from '@cafe-noisette/philbin/utils/debug';

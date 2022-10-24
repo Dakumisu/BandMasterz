@@ -1,7 +1,6 @@
 <template>
 	<div class="greetings">
 		<h1 class="green">{{ $t('global.title') }}</h1>
-		<h3>{{ $t('global.caption') }}</h3>
 	</div>
 </template>
 

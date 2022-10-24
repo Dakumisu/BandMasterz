@@ -48,6 +48,7 @@ export default function Preloader(app, base) {
 
 		bg.style.transition = 'transform 1000ms cubic-bezier(0.910, 0.000, 0.195, 0.990)';
 		bg.style.transform = 'scaleY(0)';
+		bg.style.transformOrigin = 'top';
 		await wait(400);
 		counter.style.transition = 'opacity 200ms';
 		counter.style.opacity = 0;

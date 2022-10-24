@@ -38,7 +38,7 @@ const config = {
 const defines = {
 	DEBUG: false,
 	PROJECT_BASEPATH: JSON.stringify(process.env.PWD),
-	VUE_LOG: true,
+	VUE_LOG: false,
 	VUE_LOG_LIFECYCLE: false,
 	WEBGL_LOG: true,
 	WEBGL_ASYNC: true,

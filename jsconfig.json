@@ -24,13 +24,13 @@
         "./webgl/*"
       ],
       "@app/*": [
-        "app/*"
+        "./app/*"
       ],
       "@assets/*": [
-        "assets/*"
+        "./assets/*"
       ],
       "@static/*": [
-        "static/*"
+        "./static/*"
       ],
       "@config/*": [
         "./config/*"

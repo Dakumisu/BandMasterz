@@ -1,6 +1,6 @@
 <template>
 	<section class="page page-home">
-		<p>{{ $t('home.title') }}</p>
+		<h1 class="title">{{ $t('home.title') }}</h1>
 	</section>
 </template>
 
@@ -18,9 +18,5 @@
 <style lang="scss" scoped>
 	.page-home {
 		color: white;
-
-		h1 {
-			font-size: 2em;
-		}
 	}
 </style>

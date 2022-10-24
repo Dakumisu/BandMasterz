@@ -2,13 +2,14 @@ import getCommonDefines from '@webgl/shaders/commonDefines';
 import getCommonUniforms from '@webgl/shaders/commonUniforms';
 
 import loadChunks from '@webgl/shaders/_chunks/_load';
+import Raycast from './components/Raycaster';
 
 import Scene from './components/Scene';
 
 export default function createWebgl(webgl) {
 	loadChunks();
 
-	let scene;
+	let scene, raycaster;
 
 	Object.assign(webgl, { init, preload, load, start, update, render, resize });
 
@@ -32,10 +33,16 @@ export default function createWebgl(webgl) {
 	async function start() {
 		webgl.$renderer.resize();
 		webgl.$time.init();
+
+		webgl.raycaster = raycaster = new Raycast();
+		raycaster.triggerInit();
 	}
 
 	function update() {
+		// webgl.$app.controls.listen();
+
 		if (scene) scene.triggerUpdate();
+		if (raycaster) raycaster.triggerUpdate();
 	}
 
 	function render() {

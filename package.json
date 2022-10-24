@@ -1,7 +1,7 @@
 {
-  "name": "halpert",
+  "name": "bandmasterz",
   "version": "1.0.0",
-  "description": "Vite + Vue3 + Three starter - Halpert 🌵",
+  "description": "",
   "main": "main.js",
   "author": "Dakumisu",
   "license": "MIT",
@@ -14,18 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dakumisu/Halpert.git"
+    "url": "git+https://github.com/Dakumisu/Bandmasterz.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/Dakumisu/Halpert/issues"
+    "url": "https://github.com/Dakumisu/Bandmasterz/issues"
   },
-  "homepage": "https://github.com/Dakumisu/Halpert#readme",
+  "homepage": "https://github.com/Dakumisu/Bandmasterz#readme",
   "dependencies": {
-    "@cafe-noisette/philbin": "^2.2.23",
+    "@cafe-noisette/philbin": "^2.2.29",
     "@vue/reactivity": "^3.2.37",
     "rollup-plugin-copy": "^3.4.0",
     "three": "^0.141.0",
+    "tone": "^14.7.77",
     "vue": "^3.2.41",
     "vue-router": "^4.0.16"
   },

@@ -17,12 +17,6 @@ const i18n = {
 			region: 'us',
 			default: true,
 		},
-		fr: {
-			id: 'fr',
-			name: 'Français',
-			language: 'fr',
-			region: 'fr',
-		},
 	},
 };
 

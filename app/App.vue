@@ -1,16 +1,5 @@
 <template>
 	<main class="ui" v-if="$preloader.finished">
-		<img alt="Vue logo" class="logo" src="@assets/img/logo.png" width="125" height="125" />
-
-		<HelloWorld />
-
-		<nav>
-			<RouterLink to="/">Home</RouterLink>
-			<RouterLink to="/about">About</RouterLink>
-		</nav>
-
-		<LanguagePicker labelType="language" />
-
 		<CustomRouterView />
 	</main>
 
@@ -29,14 +18,10 @@
 </template>
 
 <script setup>
-	import LanguagePicker from '@app/components/common/LanguagePicker.vue';
-	import HelloWorld from '@app/components/HelloWorld.vue';
-	import { RouterLink } from 'vue-router';
-
 	/// #if DEBUG
 	const routesList = [
 		{ label: 'Home', to: { name: 'Home' } },
-		{ label: 'About', to: { name: 'About' } },
+		{ label: 'Game', to: { name: 'Game' } },
 	];
 	/// #endif
 </script>
@@ -70,73 +55,16 @@
 		overflow: hidden;
 		width: 100vw;
 		height: 100vh;
+
+		.title {
+			position: absolute;
+			left: 1em;
+			top: 2em;
+			font-size: 1em;
+		}
 	}
 
 	.debug-gui {
 		z-index: z(debug);
-	}
-
-	.logo {
-		display: block;
-		margin: 0 auto 2rem;
-	}
-
-	a,
-	.green {
-		text-decoration: none;
-		color: #00bd7e;
-		transition: 0.4s;
-	}
-
-	nav {
-		width: 100%;
-		font-size: 12px;
-		text-align: center;
-		margin-top: 2rem;
-		z-index: calc(z(pages) + 1);
-
-		a {
-			display: inline-block;
-			padding: 0 1rem;
-			border-left: 1px solid black;
-
-			&:first-of-type {
-				border: 0;
-			}
-
-			&.router-link-exact-active {
-				color: red;
-
-				@include hover-and-touch() {
-					background-color: #85ffd68e;
-				}
-			}
-		}
-	}
-
-	@include below(bpw(sm)) {
-		body {
-			display: flex;
-			place-items: center;
-		}
-
-		header .wrapper {
-			display: flex;
-			place-items: flex-start;
-			flex-wrap: wrap;
-		}
-
-		.logo {
-			margin: 0 2rem 0 0;
-		}
-
-		nav {
-			text-align: left;
-			margin-left: -1rem;
-			font-size: 1rem;
-
-			padding: 1rem 0;
-			margin-top: 1rem;
-		}
 	}
 </style>

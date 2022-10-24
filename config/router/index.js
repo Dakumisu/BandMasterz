@@ -6,9 +6,9 @@ const routes = [
 		meta: {},
 	},
 	{
-		path: '/about',
-		name: 'About',
-		component: () => import('@app/views/about/About.vue'),
+		path: '/game',
+		name: 'Game',
+		component: () => import('@app/views/game/Game.vue'),
 		meta: {},
 	},
 ];

@@ -1,5 +1,7 @@
 import BaseScene from '@cafe-noisette/philbin/webgl/components/BaseScene';
-import { BoxGeometry, Color, Mesh, MeshBasicMaterial } from 'three';
+import { AmbientLight, DirectionalLight } from 'three';
+import Drum from './instruments/Drum';
+// import { DefaultMaterial } from '@webgl/shaders/materials';
 import MainCamera from './MainCamera';
 
 export default class Scene extends BaseScene {
@@ -9,20 +11,15 @@ export default class Scene extends BaseScene {
 
 	init() {
 		this.camera = this.add(MainCamera);
+		this.drum = this.add(Drum);
 
-		this.cubeColor = new Color(0xfec238);
-		this.cube = new Mesh(
-			new BoxGeometry(2.5, 2.5, 2.5),
-			new MeshBasicMaterial({ color: this.cubeColor }),
-		);
-		this.cube.position.z = -1;
-		this.addObject3D(this.cube);
+		const light = new DirectionalLight({ color: 0xffffff, intensity: 1 });
+		light.position.set(2, 2, 3);
+		this.addObject3D(light);
+
+		// const t = DefaultMaterial.use();
+		// this.log(t);
 	}
 
-	update() {
-		this.cubeColor.offsetHSL(0.003, 0, 0);
-		this.cube.material.color = this.cubeColor;
-		this.cube.rotation.y -= 0.01;
-		this.cube.rotation.x = Math.cos(this.webgl.$time.elapsed * 0.0003) * 0.9;
-	}
+	update() {}
 }

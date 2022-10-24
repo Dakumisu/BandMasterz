@@ -31,6 +31,13 @@ onDOMReady(async () => {
 	// Wait for the preloader to be finished
 	await app.$preloader.finished;
 
+	app.$controls.listen();
+	app.$audio.listen();
+
+	await app.$audio.load('/assets/audio/music.mp3', 'music');
+	const sample = app.$audio.get('music');
+	// app.$audio.play(sample, { loop: true });
+
 	// Start app
 	app.mount('#app');
 });

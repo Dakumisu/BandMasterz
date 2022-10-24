@@ -1,10 +1,11 @@
-import { commonDefines } from '@webgl/shaders/commonDefines';
-import { commonUniforms } from '@webgl/shaders/commonUniforms';
-
+import webgl from '@cafe-noisette/philbin/webgl';
 import { Color, ShaderMaterial, UniformsLib, UniformsUtils } from 'three';
 
 import fs from './DefaultMaterial.frag?hotshader';
 import vs from './DefaultMaterial.vert?hotshader';
+
+console.log(fs);
+console.log(vs);
 
 let instance = null;
 
@@ -23,12 +24,13 @@ class DefaultMaterial extends ShaderMaterial {
 			emissive: { value: new Color(0xffffff) },
 			specular: { value: new Color(0x333355) },
 			shininess: { value: 30 },
+			color: { value: new Color(0xfec238) },
 
-			time: commonUniforms.time,
+			...webgl.uniforms,
 		});
 
 		this.defines = {
-			...commonDefines,
+			...webgl.defines,
 		};
 
 		fs.use(this);

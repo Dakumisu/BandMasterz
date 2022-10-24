@@ -3,7 +3,7 @@ import i18n from '../i18n';
 import environnement from '../environnement';
 
 export default {
-	name: 'Halpert',
+	name: 'Bandmasterz',
 
 	i18n,
 
