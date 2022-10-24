@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "codezombiech.gitignore",
+    "slevesque.shader",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "digitalbrainstem.javascript-ejs-support",
+    "Vue.volar"
+  ]
+}

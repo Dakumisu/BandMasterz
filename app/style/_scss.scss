@@ -1,0 +1,66 @@
+// This content will be imported on ALL scss scripts.
+// This is only for scss properties (scss variables, mixins, extends, functions)
+// /!\ DO NOT PUT CSS CODE HERE /!\
+
+// Project colors. You can get them with color(COLOR_NAME)
+// You can use css variable, but it's better performance-wise to use scss variables.
+$colors: (
+	black: #000,
+	white: #fff,
+	gray: #eee,
+	light-gray: #d0d0d0,
+	dark-white: #f4f4f4,
+	dark-gray: #2c2c2c,
+	medium-gray: #9b9b9b,
+);
+
+// 1st level z-indexes. You can get them with z(Z_INDEX_NAME)
+$z-indexes: (
+	webgl: -1,
+	ui: 1,
+	pages: 2,
+	debug: 998,
+	preloader: 999
+);
+
+// Width breakpoints. Get them with bpw(BREAKPOINT_NAME) or breakpoint_width(...)
+$breakpoints-width: (
+	xs: 400px,
+	s: 640px,
+	sm: 768px,
+	md: 1024px,
+	lg: 1200px,
+	xl: 1600px,
+	xxl: 1920px,
+);
+
+// Height breakpoints. Get them with bph(BREAKPOINT_NAME) or breakpoint_height(...)
+$breakpoints-height: (
+	lg: 1400px,
+	md: 1080px,
+	sm: 600px,
+	xs: 480px
+);
+
+// Project easings. Get them with easing(EASE_NAME) or ease(EASE_NAME)
+// There is already a lot of defaults ones, see @cafe-noisette/philbin/utils/style/_easings.scss
+$easings: ();
+
+// Generic globals variables. Get them with const(VARIABLE_NAME)
+$constants: ();
+
+// Export variable getter functions using custom user variables defined above
+@forward "@cafe-noisette/philbin/utils/style/getters" with (
+	$_colors: $colors,
+	$_z-indexes: $z-indexes,
+	$_easings: $easings,
+	$_bp-width: $breakpoints-width,
+	$_bp-height: $breakpoints-height,
+	$_constants: $constants
+);
+
+// All useful mixins you need
+@forward "@cafe-noisette/philbin/utils/style/mixins-animations";
+@forward "@cafe-noisette/philbin/utils/style/mixins-breakpoints";
+@forward "@cafe-noisette/philbin/utils/style/mixins-touch";
+@forward "@cafe-noisette/philbin/utils/style/mixins-typography";

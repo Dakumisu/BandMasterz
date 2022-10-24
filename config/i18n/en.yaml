@@ -1,0 +1,13 @@
+global:
+    title: Halpert
+    caption: A cool starter
+
+home:
+    title: Page Home
+
+    head:
+        title: HOME Halpert 🌵
+        description: Vite + Vue3 + Three starter - Halpert 🌵
+
+about:
+    title: Page About

@@ -1,0 +1,39 @@
+dist
+build
+node_modules
+
+Thumbs.db
+yarn.lock
+logs
+
+tmp
+*.tmp
+
+._*
+*.pem
+.well-known
+*.local
+*.log
+.DS_Store
+.cache
+.vs
+.env
+.env.local
+.env.*.local
+.idea
+.htaccess
+
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Local Netlify folder
+.netlify
+
+# temp files
+.cn
+
+# Blender
+**/*.blend
+**/*.blend1
+**/*/__pycache__

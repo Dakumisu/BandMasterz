@@ -1,0 +1,21 @@
+// Global CSS imported in main.js
+
+// main.css is the style entry point and the first css loaded
+// it's safe to put vendor styles here (like the css reset below)
+
+@import "@cafe-noisette/philbin/utils/style/style-reset";
+@import "./variables.scss";
+@import "./fonts.scss";
+
+html {
+	font-family: sans-serif;
+	font-size: 16px;
+	font-weight: 100;
+	color: color(white);
+	background: color(black);
+}
+
+::selection {
+	color: color(white);
+	background: rgb(0 0 0 / 70%);
+}
