@@ -25,14 +25,7 @@ function audioManager(opts = {}) {
 	const gainNode = audioCtx.createGain();
 	gainNode.connect(audioCtx.destination);
 
-	watch(
-		gain,
-		(value) => {
-			console.log('gain', value);
-			gainNode.gain.value = value;
-		},
-		{ immediate: true },
-	);
+	watch(gain, (value) => (gainNode.gain.value = value), { immediate: true });
 
 	const api = {
 		audioCtx,

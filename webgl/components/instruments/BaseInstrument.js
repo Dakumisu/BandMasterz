@@ -7,7 +7,7 @@ class BaseInstrument extends BaseComponent {
 	}
 
 	init() {
-		this.log('init ' + this.constructor.name);
+		this.log('init ' + this.name);
 	}
 
 	enter() {}
@@ -20,9 +20,9 @@ class BaseInstrument extends BaseComponent {
 
 	play() {}
 
-	devtools() {
-		this.gui = this.webgl.$app.$gui.addFolder({ title: this.name, index: 1 });
+	beat() {}
 
+	devtools() {
 		this.gui
 			.addButton({ title: 'Reset Interaction' })
 			.on('click', () => this.raycaster.reset());

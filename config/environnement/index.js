@@ -4,7 +4,7 @@ export default ({ developper }) => {
 	envs.development = {
 		defines: {
 			DEBUG: true,
-			// PRELOADER_SKIP_ANIMATIONS: developper.is('Alex'),
+			PRELOADER_SKIP_ANIMATIONS: developper.is('Alex', 'g-bgjv2-04.intra.gobelins.fr'),
 		},
 	};
 

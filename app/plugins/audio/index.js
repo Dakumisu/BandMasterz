@@ -10,12 +10,6 @@ const log = DEBUG ? createLogger('Audio Manager', '#fff', '#9e00de').log : () =>
 
 let singleton;
 
-const STATES = {
-	PLAYING: 'playing',
-	PAUSED: 'paused',
-	STOPPED: 'stopped',
-};
-
 function createAudioPlugin(opts = {}) {
 	const { logger } = opts;
 

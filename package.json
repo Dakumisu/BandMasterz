@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Dakumisu/Bandmasterz#readme",
   "dependencies": {
-    "@cafe-noisette/philbin": "^2.2.29",
+    "@cafe-noisette/philbin": "^2.2.31",
     "@vue/reactivity": "^3.2.37",
     "rollup-plugin-copy": "^3.4.0",
     "three": "^0.141.0",

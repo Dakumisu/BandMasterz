@@ -4,9 +4,6 @@ import { Color, ShaderMaterial, UniformsLib, UniformsUtils } from 'three';
 import fs from './DefaultMaterial.frag?hotshader';
 import vs from './DefaultMaterial.vert?hotshader';
 
-console.log(fs);
-console.log(vs);
-
 let instance = null;
 
 class DefaultMaterial extends ShaderMaterial {

@@ -1,3 +1,4 @@
+import { paths } from '../../utils/paths';
 import path from 'path';
 
 const TYPES = {
@@ -10,7 +11,7 @@ const TYPES = {
 
 const EXTS = Object.keys(TYPES).reduce((p, v) => ((p[v] = true), p), {});
 
-const hotShaderPath = '@config/vite/hotShaders/hotShader.js';
+const hotShaderPath = paths.config + '/vite/plugins/hotShaders/hotShader.js';
 
 module.exports = function hotshadersRollupPlugin(isDev) {
 	return {

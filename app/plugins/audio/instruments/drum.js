@@ -2,8 +2,8 @@ import * as Tone from 'tone';
 
 export function createDrum() {
 	// create an array with random drum's kick frequencies
-	const kickFrequencies = Array.from({ length: 16 }, () => Math.random() * 100 + 50);
-	console.log(kickFrequencies);
+	// const kickFrequencies = Array.from({ length: 16 }, () => Math.random() * 100 + 50);
+	// console.log(kickFrequencies);
 
 	const api = {
 		kick,

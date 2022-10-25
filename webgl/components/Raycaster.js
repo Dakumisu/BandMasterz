@@ -23,7 +23,7 @@ export default class Raycast extends BaseComponent {
 		);
 		/// #endif
 
-		this.log('init ' + this.constructor.name);
+		// this.log('init Raycast');
 	}
 
 	enter(el) {

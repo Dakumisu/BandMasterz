@@ -21,10 +21,11 @@ export default function createWebgl(webgl) {
 		getCommonDefines(webgl);
 
 		scene = webgl.scene = new Scene();
-		scene.triggerInit();
 	}
 
-	async function preload() {}
+	async function preload() {
+		await webgl.$resources.preload();
+	}
 
 	function load() {}
 
@@ -33,6 +34,7 @@ export default function createWebgl(webgl) {
 	async function start() {
 		webgl.$renderer.resize();
 		webgl.$time.init();
+		scene.triggerInit();
 
 		webgl.raycaster = raycaster = new Raycast();
 		raycaster.triggerInit();

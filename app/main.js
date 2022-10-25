@@ -14,6 +14,8 @@ import App from './App.vue';
 
 const app = createApp(App);
 
+import music from '@assets/audio/music.mp3';
+
 onDOMReady(async () => {
 	// Install all plugins
 	await installPlugins(app, {
@@ -34,7 +36,7 @@ onDOMReady(async () => {
 	app.$controls.listen();
 	app.$audio.listen();
 
-	await app.$audio.load('/assets/audio/music.mp3', 'music');
+	await app.$audio.load(music, 'music');
 	const sample = app.$audio.get('music');
 	// app.$audio.play(sample, { loop: true });
 
