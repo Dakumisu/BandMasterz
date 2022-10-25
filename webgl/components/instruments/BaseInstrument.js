@@ -10,13 +10,15 @@ class BaseInstrument extends BaseComponent {
 		this.log('init ' + this.name);
 	}
 
-	enter() {}
-	leave() {}
+	raycastEnter() {}
+	raycastLeave() {}
 
-	press() {}
-	release() {}
+	raycastPress() {}
+	raycastRelease() {}
 
-	click() {}
+	raycastClick() {
+		this.beat && this.beat();
+	}
 
 	play() {}
 

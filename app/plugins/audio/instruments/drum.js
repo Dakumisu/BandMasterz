@@ -1,3 +1,4 @@
+import { wait } from '@cafe-noisette/philbin/utils/async';
 import * as Tone from 'tone';
 
 export function createDrum() {
@@ -15,10 +16,10 @@ export function createDrum() {
 
 	return api;
 
-	function kick() {
+	async function kick(delay = 0) {
 		const synth = new Tone.MembraneSynth().toDestination();
+		await wait(delay);
 		synth.triggerAttackRelease('C1', 0.5);
-		console.log(synth);
 
 		// const sampler = new Tone.Sampler({
 		// 	urls: {

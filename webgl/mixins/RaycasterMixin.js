@@ -1,8 +1,13 @@
 import { createLogger } from '@cafe-noisette/philbin/utils/debug';
 import { w } from '@cafe-noisette/philbin/utils/state';
 import BaseMixin from '@cafe-noisette/philbin/webgl/mixins/BaseMixin';
-import { Raycaster } from 'three';
-import { watch, watchEffect } from 'vue';
+import { watch } from 'vue';
+
+/// #if DEBUG
+const log = createLogger('Mixin·Raycaster', '#000', '#FED9B7').log;
+/// #else
+/// #code const log = () => {};
+/// #endif
 
 export default class RaycasterMixin extends BaseMixin {
 	created() {
@@ -10,19 +15,15 @@ export default class RaycasterMixin extends BaseMixin {
 			isRaycasting: w(false),
 			hasClicked: w(false),
 
-			enter: enter.bind(this),
-			leave: leave.bind(this),
-			press: press.bind(this),
-			release: release.bind(this),
-			reset: reset.bind(this),
+			enter: enter.bind(this.base),
+			leave: leave.bind(this.base),
+			press: press.bind(this.base),
+			release: release.bind(this.base),
+			reset: reset.bind(this.base),
 		};
 
 		if (!this.webgl.raycastingObjects) this.webgl.raycastingObjects = [];
-
 		this.webgl.raycastingObjects.push(this.base);
-
-		this.name = 'Raycaster';
-		this.log = createLogger('Mixin·' + this.name + '·' + this.base.name, '#000', '#FED9B7').log;
 
 		this.base.raycaster.hoverWatcher = this.base.raycaster.isRaycasting.watchImmediate((v) =>
 			v ? this.base.raycaster.enter() : this.base.raycaster.leave(),
@@ -45,41 +46,44 @@ export default class RaycasterMixin extends BaseMixin {
 }
 
 function enter() {
-	// this.log('enter');
-
-	this.base.enter();
+	if (!this.isInit) return;
+	// log('enter');
+	this.raycastEnter();
 }
 
 function leave() {
-	// this.log('leave');
-	if (this.webgl.$app.$controls.touch.pressed) this.base.raycaster.release(true);
-
-	this.base.leave();
+	if (!this.isInit) return;
+	// log('leave');
+	if (this.webgl.$app.$controls.touch.pressed) this.raycaster.release(true);
+	this.raycastLeave();
 }
 
 function press() {
-	if (!this.base.raycaster.isRaycasting.value) return;
-	if (this.base.raycaster.hasClicked.value) return;
+	if (!this.isInit) return;
+	if (!this.raycaster.isRaycasting.value) return;
+	if (this.raycaster.hasClicked.value) return;
 
-	// this.log('press');
-	this.base.press();
+	// log('press');
+	this.raycastPress();
 }
 
 function release(force = false) {
-	if (!this.base.raycaster.isRaycasting.value && !force) return;
-	if (this.base.raycaster.hasClicked.value) return;
+	if (!this.isInit) return;
+	if (!this.raycaster.isRaycasting.value && !force) return;
+	if (this.raycaster.hasClicked.value) return;
 
-	// this.log('release');
+	// log('release');
 
-	this.base.release();
+	this.raycastRelease();
 
-	if (this.base.raycaster.isRaycasting.value) {
-		this.log('click');
-		this.base.raycaster.hasClicked.set(true);
-		this.base.click();
+	if (this.raycaster.isRaycasting.value) {
+		log('click', this.name);
+		// this.raycaster.hasClicked.set(true);
+		this.raycastClick();
 	}
 }
 
 function reset() {
-	this.base.raycaster.hasClicked.set(false);
+	if (!this.isInit) return;
+	this.raycaster.hasClicked.set(false);
 }

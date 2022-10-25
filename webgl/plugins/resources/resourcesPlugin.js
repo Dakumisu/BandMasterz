@@ -1,14 +1,13 @@
 import files from '@cafe-noisette/philbin/utils/files';
 import imageSupport from '@cafe-noisette/philbin/utils/files/imageSupport';
+import { listMedias } from '@cafe-noisette/philbin/utils/files/listMedias';
 
 import { loadImage } from '@cafe-noisette/philbin/utils/files/loaders/loadImage';
 import { loadGLTF } from './loaders/loadGLTF';
 
-import { listMedias } from '@app/utils/listMedias';
 import wrapModel from '@webgl/utils/wrapModel';
-// import { listMedias, registerExt } from '@cafe-noisette/philbin/utils/files/listMedias';
 
-listMedias.registerExt(['gltf', 'glb']);
+listMedias.registerExt(['gltf', 'glb'], { type: 'model' });
 const MODELS = listMedias(import.meta.globEager('/assets/models/*.{gltf,glb}'), {
 	forceArray: true,
 });

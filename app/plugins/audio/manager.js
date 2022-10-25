@@ -1,10 +1,11 @@
+import { raf } from '@cafe-noisette/philbin/utils/raf';
 import { app } from '@cafe-noisette/philbin/vue/app';
-import { ref, watch } from 'vue';
+import { ref, watch, reactive } from 'vue';
 
 /// #if DEBUG
 /// #code import { createLogger } from '@cafe-noisette/philbin/utils/debug';
+/// #code const logger = DEBUG ? createLogger('Audio Manager', '#fff', '#9e00de') : () => {};
 /// #endif
-const logger = DEBUG ? createLogger('Audio Manager', '#fff', '#9e00de') : () => {};
 
 const STATES = {
 	PLAYING: 'playing',
@@ -21,7 +22,7 @@ function audioManager(opts = {}) {
 	const audioCtx = new AudioContext();
 	const analyser = audioCtx.createAnalyser();
 
-	const gain = ref(0);
+	const gain = reactive(ref(0));
 	const gainNode = audioCtx.createGain();
 	gainNode.connect(audioCtx.destination);
 
@@ -94,20 +95,20 @@ function audioManager(opts = {}) {
 		return new Promise((resolve) => {
 			sampleSourceNode.onended = () => {
 				if (api.state !== STATES.PLAYING) return;
-				logger.log('Sample ended');
+				if (DEBUG) logger.log('Sample ended');
 				stop();
 				if (loop) play(sample, { reset: true, loop });
 				resolve();
 			};
 		});
 
-		logger.log('start ' + getLabel(sample));
+		if (DEBUG) logger.log('start ' + getLabel(sample));
 
 		return sampleSourceNode;
 
 		return new Promise((resolve) => {
 			source.node.onended = () => {
-				logger.log('ON PLAY END', source);
+				if (DEBUG) logger.log('ON PLAY END', source);
 				resolve();
 			};
 		});
@@ -154,7 +155,7 @@ function audioManager(opts = {}) {
 		const ab = await response.arrayBuffer();
 		const audio = (api.samples.list[label] = await audioCtx.decodeAudioData(ab));
 
-		logger.log('sample ' + label + ' loaded');
+		if (DEBUG) logger.log('sample ' + label + ' loaded');
 
 		return audio;
 	}
@@ -198,7 +199,7 @@ function audioManager(opts = {}) {
 		gui.addInput(api.gain, 'value', {
 			label: 'Gain',
 			min: -1,
-			max: 2,
+			max: 1,
 			step: 0.01,
 			reactive: true,
 		});
