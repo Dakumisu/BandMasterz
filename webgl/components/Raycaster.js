@@ -40,10 +40,11 @@ export default class Raycast extends BaseComponent {
 
 		this.base.setFromCamera(mouse, cam);
 
-		this.webgl.raycastingObjects.map((el) => {
-			const intersects = this.base.intersectObject(el.base, true);
-			el.raycaster.isRaycasting.set(intersects.length > 0);
-		});
+		this.webgl.raycastingObjects.length &&
+			this.webgl.raycastingObjects.map((el) => {
+				const intersects = this.base.intersectObject(el.base, true);
+				el.raycaster.isRaycasting.set(intersects.length > 0);
+			});
 
 		/// #if DEBUG
 		this.helper.arrow.position.copy(mouse);

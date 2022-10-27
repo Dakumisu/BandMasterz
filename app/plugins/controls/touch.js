@@ -77,6 +77,7 @@ export default function touch() {
 		normalizePos,
 		normalizeRelativePos,
 		swipe: '',
+		side: '',
 		listen: markRaw(listen),
 		poll: markRaw(poll),
 	});
@@ -85,6 +86,10 @@ export default function touch() {
 
 	function getTouch(e) {
 		return e.changedTouches[0];
+	}
+
+	function getPosSide(pos) {
+		return pos > app.$viewport.width * 0.5 ? 'RIGHT' : 'LEFT';
 	}
 
 	function onStart(e) {
@@ -107,6 +112,8 @@ export default function touch() {
 		delta.x = delta.y = 0;
 		pos.x = prevPos.x = firstPos.x = o.clientX;
 		pos.y = prevPos.y = firstPos.y = o.clientY;
+
+		state.side = getPosSide(pos.x);
 
 		needsClickOut = false;
 		needsClickIn = true;

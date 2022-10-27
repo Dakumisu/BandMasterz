@@ -55,10 +55,12 @@ function createAudioPlugin(opts = {}) {
 		api.analyser.listen();
 	}
 
-	function install(app) {
+	async function install(app) {
 		app.provide('audio', api);
 		app.config.globalProperties.$audio = api;
 		app.$audio = api;
+
+		await api.tone.init();
 
 		log(api);
 

@@ -6,8 +6,8 @@ import createWebglPlugin from './webgl';
 /* prettier-ignore */
 const list = [
 	...defaultPlugins,
-	[createAudioPlugin, 'audio'],
 	[createControlsPlugin, 'controls'],
+	[createAudioPlugin, 'audio'],
 	[createWebglPlugin, 'webgl'],
 ];
 

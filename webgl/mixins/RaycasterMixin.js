@@ -14,6 +14,7 @@ export default class RaycasterMixin extends BaseMixin {
 		this.base.raycaster = {
 			isRaycasting: w(false),
 			hasClicked: w(false),
+			hasPressed: w(false),
 
 			enter: enter.bind(this.base),
 			leave: leave.bind(this.base),
@@ -22,7 +23,6 @@ export default class RaycasterMixin extends BaseMixin {
 			reset: reset.bind(this.base),
 		};
 
-		if (!this.webgl.raycastingObjects) this.webgl.raycastingObjects = [];
 		this.webgl.raycastingObjects.push(this.base);
 
 		this.base.raycaster.hoverWatcher = this.base.raycaster.isRaycasting.watchImmediate((v) =>
@@ -63,6 +63,8 @@ function press() {
 	if (!this.raycaster.isRaycasting.value) return;
 	if (this.raycaster.hasClicked.value) return;
 
+	this.raycaster.hasPressed.set(true);
+
 	// log('press');
 	this.raycastPress();
 }
@@ -70,9 +72,11 @@ function press() {
 function release(force = false) {
 	if (!this.isInit) return;
 	if (!this.raycaster.isRaycasting.value && !force) return;
+	if (!this.raycaster.hasPressed.value) return;
 	if (this.raycaster.hasClicked.value) return;
 
 	// log('release');
+	this.raycaster.hasPressed.set(false);
 
 	this.raycastRelease();
 

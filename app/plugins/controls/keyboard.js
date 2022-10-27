@@ -1,11 +1,40 @@
 import { app } from '@cafe-noisette/philbin/vue/app';
 import { markRaw, reactive, ref, watch } from 'vue';
 
-const WHITELIST_KEYS = [
-	'KeyS',
-	'KeyW',
-	'KeyD',
+const MUSIC_KEYS = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB'];
+// all keys of the keyboard
+const KEYBOARD_KEYS = [
 	'KeyA',
+	'KeyB',
+	'KeyC',
+	'KeyD',
+	'KeyE',
+	'KeyF',
+	'KeyG',
+	'KeyH',
+	'KeyI',
+	'KeyJ',
+	'KeyK',
+	'KeyL',
+	'KeyM',
+	'KeyN',
+	'KeyO',
+	'KeyP',
+	'KeyQ',
+	'KeyR',
+	'KeyS',
+	'KeyT',
+	'KeyU',
+	'KeyV',
+	'KeyW',
+	'KeyX',
+	'KeyY',
+	'KeyZ',
+];
+
+const WHITELIST_KEYS = [
+	// ...MUSIC_KEYS,
+	...KEYBOARD_KEYS,
 	'Space',
 	'ArrowUp',
 	'ArrowDown',
@@ -50,12 +79,26 @@ export default function keyboard() {
 		keys,
 		unpressAllKeys: markRaw(unpressAllKeys),
 		listen: markRaw(listen),
+
+		watchKey,
+		watchKeys,
 	});
 
 	unpressAllKeys();
 	api.pressedCount = 0;
 
 	return api;
+
+	function watchKey(key, cb) {
+		return watch(
+			() => keys[key].value,
+			(v) => cb(key, v),
+		);
+	}
+
+	function watchKeys(keys, cb) {
+		return keys.map((key) => watchKey(key, cb));
+	}
 
 	function listen() {
 		const opts = { passive: false };

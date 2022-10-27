@@ -1,41 +1,114 @@
 import { wait } from '@cafe-noisette/philbin/utils/async';
+import { prng } from '@cafe-noisette/philbin/utils/maths';
+import { s } from '@cafe-noisette/philbin/utils/state';
 import * as Tone from 'tone';
+import { watch } from 'vue';
+import { samples } from './samples';
+
+const KEYS_WHITELIST = [
+	['KeyC', 'E5'],
+	['KeyV', 'F5'],
+].reduce((p, v) => ((p[v[0]] = v[1]), p), {});
 
 export function createDrum() {
-	// create an array with random drum's kick frequencies
-	// const kickFrequencies = Array.from({ length: 16 }, () => Math.random() * 100 + 50);
-	// console.log(kickFrequencies);
+	const reverb = new Tone.Reverb(0.6).toDestination();
+	const stero = new Tone.StereoWidener(0.6).toDestination();
 
 	const api = {
-		kick,
+		init,
+
+		snare: snare(),
+		randomSnare,
+
+		hit: s(),
+		release: s(),
+
+		samples: samples.drum,
+		sampler: null,
 
 		/// #if DEBUG
 		devtools,
 		/// #endif
 	};
 
+	// app.$controls.keyboard.watchKeys(Object.keys(KEYS_WHITELIST), (key, value) => {
+	// 	const note = KEYS_WHITELIST[key];
+	// 	value ? api.snare.hit({ note, emit: true }) : api.snare.release({ note, emit: true });
+	// });
+
 	return api;
 
-	async function kick(delay = 0) {
-		const synth = new Tone.MembraneSynth().toDestination();
-		await wait(delay);
-		synth.triggerAttackRelease('C1', 0.5);
+	async function init() {
+		api.sampler = await app.$audio.tone.load({
+			instruments: 'drum',
+		});
 
-		// const sampler = new Tone.Sampler({
-		// 	urls: {
-		// 		A1: 'A1.mp3',
-		// 		A2: 'A2.mp3',
-		// 	},
-		// 	baseUrl: 'https://tonejs.github.io/audio/casio/',
-		// 	onload: () => {
-		// 		sampler.triggerAttackRelease(['C1', 'E1', 'G1', 'B1'], 0.5);
-		// 	},
-		// }).toDestination();
+		api.sampler.toDestination();
+		api.sampler.connect(reverb);
+		api.sampler.connect(stero);
+	}
+
+	function snare() {
+		return {
+			hit: async ({ note, key, delay = 0, emit = false } = {}) => {
+				if (!note && !key) return;
+
+				note = note || KEYS_WHITELIST[key];
+
+				if (emit) api.hit.emit();
+				await wait(delay);
+				// if (Array.isArray(note)) {
+				// 	note.map((n) => {
+				// 		const midi = Tone.Frequency(n).toMidi();
+				// 		api.sampler.triggerAttack(Tone.Frequency(midi, 'midi').toNote());
+				// 	});
+				// } else {
+				// 	const midi = Tone.Frequency(note).toMidi();
+				// 	api.sampler.triggerAttack(Tone.Frequency(midi, 'midi').toNote());
+				// }
+				const midi = Tone.Frequency(note).toMidi();
+				api.sampler.triggerAttack(Tone.Frequency(midi, 'midi').toNote());
+				// if (autoRelease) api.snare.release({ note, delay: 200 });
+			},
+			release: async ({ note, key, delay = 0, emit = false } = {}) => {
+				if (!note && !key) return;
+
+				note = note || KEYS_WHITELIST[key];
+
+				if (emit) api.release.emit();
+				await wait(delay);
+				const midi = Tone.Frequency(note).toMidi();
+				api.sampler.triggerRelease(Tone.Frequency(midi, 'midi').toNote());
+			},
+		};
+	}
+
+	async function randomSnare({ delay = 0, emit = false } = {}) {
+		// const severalKeys = prng.randomFloat(0, 1) > 0.85;
+		// let notes;
+
+		// if (severalKeys) {
+		// 	const numberOfKeys = prng.randomInt(2, 3);
+		// 	notes = [...Array(numberOfKeys)].map(getRandomNote);
+		// } else {
+		// 	notes = getRandomNote();
+		// }
+		const note = getRandomNote();
+
+		await api.snare.hit({ delay, note, emit });
+	}
+
+	function getRandomNote() {
+		const note = Object.keys(api.samples)[
+			prng.randomInt(0, Object.keys(api.samples).length - 1)
+		];
+		return note;
 	}
 
 	/// #if DEBUG
 	function devtools(gui) {
-		gui.addButton({ title: 'Kick' }).on('click', kick);
+		gui.addButton({ title: 'Snare' }).on('click', snare);
+		gui.addButton({ title: 'Random Snare' }).on('click', randomSnare);
 	}
 	/// #endif
 }

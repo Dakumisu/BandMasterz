@@ -13,11 +13,17 @@ class BaseInstrument extends BaseComponent {
 	raycastEnter() {}
 	raycastLeave() {}
 
-	raycastPress() {}
-	raycastRelease() {}
+	raycastPress() {
+		const index = this.webgl.$app.$controls.touch.side === 'LEFT' ? 0 : 1;
+		this.press && this.press(null, index);
+	}
+	raycastRelease() {
+		const index = this.webgl.$app.$controls.touch.side === 'LEFT' ? 0 : 1;
+		this.release && this.release(null, index);
+	}
 
 	raycastClick() {
-		this.beat && this.beat();
+		// this.beat && this.beat();
 	}
 
 	play() {}

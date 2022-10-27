@@ -1,3 +1,5 @@
+import webgl from '@cafe-noisette/philbin/webgl';
+import { Color } from 'three';
 import DrumMat from '../DrumMat/DrumMat';
 
 import fs from './DrumTopMat.frag?hotshader';
@@ -9,9 +11,12 @@ class DrumTopMat extends DrumMat {
 	constructor() {
 		super();
 
+		webgl.matToRender.push(this);
+
 		Object.assign(this.uniforms, {
-			kickAlpha: { value: 0 },
+			kickAlpha: { value: 1 },
 			kickSide: { value: [0, 0] },
+			uFBO: { type: 't', value: null },
 		});
 
 		fs.use(this);

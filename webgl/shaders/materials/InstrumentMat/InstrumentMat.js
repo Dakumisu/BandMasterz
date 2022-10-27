@@ -7,14 +7,15 @@ import vs from './InstrumentMat.vert?hotshader';
 let instance = null;
 
 class InstrumentMat extends ShaderMaterial {
-	constructor(opts = {}) {
+	constructor() {
 		super();
 
 		this.uniforms = {
-			uColor: { value: new Color(0xbecede) },
-			uColorDark: { value: new Color(0x798999) },
+			uColor: { value: new Color(0xaabbdd) },
+			uColorDark: { value: new Color(0x798999).offsetHSL(0, 0, 0.2) },
+
 			...webgl.uniforms,
-			...opts.uniforms,
+			...webgl.uniforms.textures,
 		};
 
 		this.defines = {

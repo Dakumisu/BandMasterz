@@ -21,5 +21,9 @@ export default class Scene extends BaseScene {
 		// this.log(t);
 	}
 
+	resize() {
+		this.drum && this.drum.resize();
+	}
+
 	update() {}
 }

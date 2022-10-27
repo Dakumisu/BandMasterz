@@ -1,10 +1,18 @@
-import * as Tone from 'tone';
 import { createDrum } from './instruments';
+import SampleLibrary from './SampleLibrary';
 
 function audioTone(opts = {}) {
 	const drum = createDrum();
 
 	const api = {
+		init,
+
+		...SampleLibrary,
+
+		instruments: {
+			drum,
+		},
+
 		drum,
 
 		/// #if DEBUG
@@ -13,6 +21,10 @@ function audioTone(opts = {}) {
 	};
 
 	return api;
+
+	async function init() {
+		await drum.init();
+	}
 
 	/// #if DEBUG
 	function devtools(_gui) {
