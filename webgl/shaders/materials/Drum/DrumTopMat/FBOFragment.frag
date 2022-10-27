@@ -3,7 +3,7 @@ precision highp float;
 uniform float time;
 uniform float kickSide[2];
 uniform vec4 res;
-uniform vec2 fboSize;
+uniform vec2 FBOSize;
 uniform sampler2D uFBO, noiseVoronoi, noiseFbm, noisePerlin;
 
 varying vec2 vUv;
@@ -31,10 +31,10 @@ void main() {
 	vec2 transfromUv = mixUV(uv, noiseUv, .12);
 	// vec2(noiseUv.r, noiseUv.g) * uv;
 
-	// vec2 blurOffset = vec2(1.) / fboSize;
+	// vec2 blurOffset = vec2(1.) / FBOSize;
 	// noise = blur(noise, uFBO, uv, blurOffset);
 
-	vec2 cellSize = 1. / fboSize;
+	vec2 cellSize = 1. / FBOSize;
 	vec2 fragUv = gl_FragCoord.xy;
 	vec2 cellUv = fragUv * cellSize;
 	float viscosity = 0.998;

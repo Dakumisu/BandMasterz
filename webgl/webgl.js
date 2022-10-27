@@ -1,8 +1,8 @@
 import getCommonDefines from '@webgl/shaders/commonDefines';
 import getCommonUniforms from '@webgl/shaders/commonUniforms';
-
 import loadChunks from '@webgl/shaders/_chunks/_load';
-import FBO from './components/fbo/FBO';
+
+import Particles from './components/particles/Particles';
 import Raycast from './components/Raycaster';
 
 import Scene from './components/Scene';
@@ -12,7 +12,7 @@ let isInit = false;
 export default function createWebgl(webgl) {
 	loadChunks();
 
-	let scene, raycaster, fbo;
+	let scene, raycaster, particles;
 
 	Object.assign(webgl, { init, preload, load, start, update, render, resize });
 
@@ -24,10 +24,9 @@ export default function createWebgl(webgl) {
 		getCommonDefines(webgl);
 
 		scene = webgl.scene = new Scene();
-		// fbo = webgl.fbo = new FBO();
 		raycaster = webgl.raycaster = new Raycast();
+		// particles = webgl.particles = new Particles();
 
-		webgl.matToRender = [];
 		webgl.raycastingObjects = [];
 
 		isInit = true;
@@ -54,16 +53,15 @@ export default function createWebgl(webgl) {
 
 		scene.triggerInit();
 		raycaster.triggerInit();
-		// fbo.triggerInit();
+		// particles.triggerInit();
 	}
 
 	function update() {
-		// webgl.$app.controls.listen();
 		webgl.uniforms.time.value += webgl.$time.dt;
 
 		if (scene) scene.triggerUpdate();
 		if (raycaster) raycaster.triggerUpdate();
-		// if (fbo) fbo.triggerUpdate();
+		// if (particles) particles.triggerUpdate();
 	}
 
 	function render() {

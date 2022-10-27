@@ -11,8 +11,6 @@ class DrumTopMat extends DrumMat {
 	constructor() {
 		super();
 
-		webgl.matToRender.push(this);
-
 		Object.assign(this.uniforms, {
 			kickAlpha: { value: 1 },
 			kickSide: { value: [0, 0] },

@@ -27,7 +27,6 @@ class FBO extends BaseComponent {
 			uniforms: {
 				uFBO: this.pprt.uniform,
 				...this.webgl.uniforms,
-				seed: { value: prng.hash2d(prng.random(), prng.random()) },
 			},
 			defines: {
 				...this.webgl.defines,
@@ -41,10 +40,6 @@ class FBO extends BaseComponent {
 		this.heightFilter.render();
 
 		this.pprt.unbind();
-		// if (this.webgl.matToRender)
-		// 	this.webgl.matToRender.map(
-		// 		(mat) => (mat.uniforms.uFBO.value = this.pprt.uniform.value),
-		// 	);
 		// this.composerFilter.render();
 
 		this.pprt.swap();

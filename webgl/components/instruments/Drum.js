@@ -24,7 +24,7 @@ class Drum extends BaseInstrument {
 
 	beforeInit() {
 		this.FBOFragment = FBOFragment;
-		this.fboSize = 1024;
+		this.FBOSize = 1024;
 	}
 
 	init() {
@@ -83,7 +83,7 @@ class Drum extends BaseInstrument {
 	afterInit() {
 		Object.assign(this.fbo.heightFilter.uniforms, {
 			kickSide: { value: [0, 0] },
-			fboSize: { value: new Vector2().set(this.fboSize, this.fboSize) },
+			FBOSize: { value: new Vector2().set(this.FBOSize, this.FBOSize) },
 		});
 	}
 

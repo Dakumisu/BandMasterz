@@ -23,8 +23,8 @@ export default class FBOMixin extends BaseMixin {
 
 		fbo.pprt = pingPongRT({
 			name: this.base.name,
-			width: this.base.fboSize || size.value.x,
-			height: this.base.fboSize || size.value.y,
+			width: this.base.FBOSize || size.value.x,
+			height: this.base.FBOSize || size.value.y,
 		});
 
 		fbo.heightFilter = createFilter({
@@ -33,7 +33,6 @@ export default class FBOMixin extends BaseMixin {
 				uFBO: fbo.pprt.uniform,
 				...this.webgl.uniforms,
 				...this.webgl.uniforms.textures,
-				seed: { value: prng.hash2d(prng.random(), prng.random()) },
 			},
 			defines: {
 				...this.webgl.defines,
@@ -50,7 +49,6 @@ function resize(x, y) {
 }
 
 function render() {
-	// log('render');
 	if (!this.isInit) return;
 
 	this.fbo.pprt.bind();
