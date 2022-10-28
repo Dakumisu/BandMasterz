@@ -54,6 +54,7 @@ class Drum extends BaseInstrument {
 		console.log(drumsticks);
 
 		group.add(...[drum, ...drumsticks]);
+		group.scale.setScalar(0.5);
 
 		this.audio = this.webgl.$app.$audio.tone.drum;
 		this.hitWatcher = this.audio.hit.watch(this.press.bind(this));
